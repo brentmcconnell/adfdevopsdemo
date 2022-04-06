@@ -1,0 +1,85 @@
+# Basic YAML pipeline for Azure Data Factory 
+trigger:
+  branches:
+    include:
+      - adf_publish 
+
+variables:
+- name: ADF_NAME
+  value: "${PROD_ADF}"
+
+- name: KV_ADDRESS
+  value: "${PROD_ADF_KV_ADDRESS}"
+
+- name: PROD_ADF_RG
+  value: "${PROD_ADF_RG}"
+
+- name: LOCATION
+  value: "${ADF_LOCATION}"
+
+pool:
+   vmImage: "windows-latest"
+steps:
+- checkout: self
+  path: src
+
+- task: CopyFiles@2  
+  inputs:
+    SourceFolder: '$(Pipeline.Workspace)\src'
+    Contents: '**/*ForFactory.json'
+    TargetFolder: '$(build.artifactstagingdirectory)\adf_publish'
+    CleanTargetFolder: true
+    OverWrite: true
+    flattenFolders: true
+  displayName: 'Extract ARM - ADF Pipelines'
+
+- powershell: |
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/msft-csu/azure-linux-scripts/master/ps/adf-maintenance.ps1 -OutFile adf-maintenance.ps1
+  displayName: "Grab adf maintenance script from remote repo"
+
+- powershell: |
+    tree "$(Pipeline.Workspace)" /F
+  displayName: "Show a directory tree of Pipeline.Workspace"
+  
+- task: AzurePowerShell@5
+  displayName: 'Stop ADF triggers'
+  inputs:
+    azureSubscription: 'azure-sp'
+    ScriptType: 'FilePath'
+    ScriptPath: '$(System.DefaultWorkingDirectory)/adf-maintenance.ps1'
+    ScriptArguments:  -armTemplate "$(build.artifactstagingdirectory)\adf_publish\ARMTemplateForFactory.json" 
+                      -ResourceGroupName "$(PROD_ADF_RG)" 
+                      -DataFactoryName "$(ADF_NAME)" 
+                      -predeployment $true 
+                      -deleteDeployment $false
+    azurePowerShellVersion: 'LatestVersion'
+
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'azure-sp'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(PROD_ADF_RG)'
+    location: '$(LOCATION)'
+    templateLocation: 'Linked artifact'
+    csmFile: '$(build.artifactstagingdirectory)\adf_publish\ARMTemplateForFactory.json'
+    csmParametersFile: '$(build.artifactstagingdirectory)\adf_publish\ARMTemplateParametersForFactory.json'
+    overrideParameters: >
+      -factoryName "$(ADF_NAME)" 
+      -kv-service_properties_typeProperties_baseUrl "$(KV_ADDRESS)"
+    deploymentMode: 'Incremental'
+  displayName: Deploy ADF Pipelines
+  enabled: true
+  
+- task: AzurePowerShell@5
+  displayName: 'Start ADF triggers'
+  inputs:
+    azureSubscription: 'azure-sp'
+    ScriptType: 'FilePath'
+    ScriptPath: '$(System.DefaultWorkingDirectory)/adf-maintenance.ps1'
+    ScriptArguments:  -armTemplate "$(build.artifactstagingdirectory)\adf_publish\ARMTemplateForFactory.json" 
+                      -ResourceGroupName "$(PROD_ADF_RG)" 
+                      -DataFactoryName "$(ADF_NAME)" 
+                      -predeployment $false 
+                      -deleteDeployment $true
+    azurePowerShellVersion: 'LatestVersion'
