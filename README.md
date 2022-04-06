@@ -1,4 +1,4 @@
-# adfdevopsdemo
+# ADF DevOps Demo
 
 This repository can be used to setup a working demo of Azure Data Factory across multiple environments using Terraform.  This will help interesting users learn ways to setup Azure DevOps projects and connect them with Azure Data Factory to publish changes from one environment to another.
 
