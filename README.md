@@ -5,13 +5,13 @@ This repository can be used to setup a working demo of Azure Data Factory across
 ## Prerequisites
 1. Azure Service Principal with Owner permissions on a subscription.  This is necessary because some of the scripts involved will setup roles and permissions in the subscription
 2. Bash shell.  This can be done in Azure Shell or from any workstation that as access to /bin/bash
-3. Azure CLI, jquery and git installed on the workstation.
+3. Azure CLI, jquery, envsubst and git installed on the workstation.
 4. Azure Devops Extension for Azure CLI.  To install use "az extension add --name azure-devops"
 5. Azure DevOps organization and Azure DevOps PAT with permissions to create ADO projects, repositories and pipelines.
 
 ## Directions
 1. Clone this repository to an environment that can execute bash scripts
-2. Ensure the bash shell has access to "az", "git", "jq" commands from the command line.
+2. Ensure the bash shell has access to "az", "git", "jq", "envsubst" commands from the command line.
 3. Execute "az login" and login to Azure with an account that has at least "Owner" access to the subscription.  
 5. Collect the appId and password of the service principal that has Owner rights on the subscription.  This SP will be used by Azure DevOps to execute pipelines.
 6. Set an environment variable called ADO_ORG with the URL to your ADO organization (https://dev.azure.com/someorg)
