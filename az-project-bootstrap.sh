@@ -259,7 +259,7 @@ if ! [ -z "$DEVOPS" ]; then
 
   if [ $TERRAFORM == "true" ]; then
     # Only allow .tf and .tfvars files
-    for z in $(find . -type f ! \( -name \*.tmpl -o -name \*.sh -o -name \*.yml -o -name \*.tfvars -o -name \*.tf -o -path '*/\.*' \) -print -maxdepth 1 );do
+    for z in $(find . -type f ! \( -name \*.tmpl -o -name \*.sh -o -name \*.md -o -name \*.yml -o -name \*.tfvars -o -name \*.tf -o -path '*/\.*' \) -print -maxdepth 1 );do
       if test -f "$z"; then
         echo "Error: Directory must only contain .tf or .tfvar files."
         echo "       This script will bootstrap tf files and check them into Git"
