@@ -10,7 +10,7 @@ This repository can be used to setup a working demo of Azure Data Factory across
    2.  cd ~/bin
    3.  curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s\`-\`uname -m` -o envsubst
    4.  chmod +x envsubst
-8. Check that git is configured for commits by running "git config --list" and ensure that user.name and user.email are set.  If these are not set the script will fail.  Use "git config --global user.name "John Doe" and "git config --global user.email johndoe@example.com" to setup.
+8. Check that git is configured for commits by running "git config --list" and ensure that user.name and user.email are set.  If these are not set the script will fail.  Use "git config --global user.name 'John Doe'" and "git config --global user.email 'johndoe@example.com'" to setup.
 9. Azure Devops Extension for Azure CLI.  To install use "az extension add --name azure-devops"
 10. Azure DevOps organization and Azure DevOps PAT with permissions to create ADO projects, repositories and pipelines.
 11. "Microsoft.DataFactory" will need to be registered for use in the Azure Subscription you are using.  Check using "az provider list --query "[?registrationState=='Registered']" --output table"
