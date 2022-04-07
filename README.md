@@ -5,7 +5,7 @@ This repository can be used to setup a working demo of Azure Data Factory across
 ## Prerequisites
 1. Azure Service Principal with Owner permissions on a subscription.  This is necessary because some of the scripts involved will setup roles and permissions in the subscription
 2. Bash shell.  This can be done in Azure Shell or from any workstation that as access to /bin/bash
-3. Azure CLI, jquery, envsubst and git installed on the workstation and configured.  If running for Azure Shell you will need to do the following:
+3. Azure CLI, jquery, envsubst and git installed on the workstation and configured.  If running in Azure Shell you will need to do the following to install envsubst:
    1. mkdir ~/bin
    2. cd ~/bin
    3. curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst
