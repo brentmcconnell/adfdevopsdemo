@@ -6,10 +6,10 @@ This repository can be used to setup a working demo of Azure Data Factory across
 1. Azure Service Principal with Owner permissions on a subscription.  This is necessary because some of the scripts involved will setup roles and permissions in the subscription
 2. Bash shell.  This can be done in Azure Shell or from any workstation that as access to /bin/bash
 3. Azure CLI, jquery, envsubst and git installed on the workstation and configured.  If running in Azure Shell you will need to do the following to install envsubst:
-   1. mkdir ~/bin
-   2. cd ~/bin
-   3. curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst
-   4. chmod +x envsubst
+   1.  mkdir ~/bin
+   2.  cd ~/bin
+   3.  curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst
+   4.  chmod +x envsubst
 8. Check that git is configured for commits by running "git config --list" and ensure that user.name and user.email are set.  If these are not set the script will fail.  Use "git config --global user.name "John Doe" and "git config --global user.email johndoe@example.com" to setup.
 9. Azure Devops Extension for Azure CLI.  To install use "az extension add --name azure-devops"
 10. Azure DevOps organization and Azure DevOps PAT with permissions to create ADO projects, repositories and pipelines.
