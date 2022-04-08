@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # This script bootstraps a Terraform project for Azure DevOps
 # Running this script will create a remote tfstate file in a storage account.
 # It also will create several resource groups and an Azure DevOps project.
