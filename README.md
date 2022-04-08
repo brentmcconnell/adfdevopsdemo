@@ -36,3 +36,16 @@ The az-project-bootstrap.sh script does a number of things and takes several opt
 6. The mgmt resource group will contain a Storage Account and an Azure KeyVault.  The storage account is used by Terraform to manage Azure state and the Keyvault will contain information about the service principal you passed in on the command line
 7. After the initial execution of the script multiple pipelines will be executed in Azure DevOps that will use Terraform to create additional resources.  These resources will include some Data resource groups that will contain frequently used Azure resources that are consumed by ADF like a SQL Server database and a storage account
 8. In each of the environment resource groups you will also have a KeyVault that works in conjuntion with the ADF for managing connection information for the resources created in the data resource groups
+
+## CLEANUP
+The az-project-bootstrap-cleanup.sh script can be used to cleanup the resource groups and Azure DevOps project that was created above.  NOTE:  Great care should be used with this script since it DELETES lots of things.
+```
+./az-project-bootstrap-cleanup.sh \
+  -g PROJ1234-DATA-DEV-RG \
+  -g PROJ1234-DATA-PRD-RG \
+  -g PROJ1234-DEV-RG \
+  -g PROJ1234-PRD-RG \
+  -g PROJ1234-MGMT-RG \
+  -d bootstrap-PROJ1234
+```
+NOTE: above you can place as many resource groups as necessary that you want to remove with the "-g" option.  You also pass in the ADO project with "-d"
