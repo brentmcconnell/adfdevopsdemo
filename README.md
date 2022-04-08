@@ -6,14 +6,16 @@ This repository can be used to setup a working demo of Azure Data Factory across
 1. Azure Service Principal with Owner permissions on a subscription.  This is necessary because some of the scripts involved will setup roles and permissions in the subscription.  Using the az cli this can be done with "az ad sp create-for-rbac --role Owner --name ownersp"
 2. Bash shell.  This can be done in Azure Shell or from any workstation that as access to /bin/bash
 3. Azure CLI, jquery, envsubst and git installed on the workstation and configured.  If running in Azure Shell you will need to do the following to install envsubst:
-   1.  mkdir ~/bin
-   2.  cd ~/bin
-   3.  curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s\`-\`uname -m` -o envsubst
-   4.  chmod +x envsubst
-8. Check that git is configured for commits by running "git config --list" and ensure that user.name and user.email are set.  If these are not set the script will fail.  Use "git config --global user.name 'John Doe'" and "git config --global user.email 'johndoe@example.com'" to setup.
-9. Azure Devops Extension for Azure CLI.  To install use "az extension add --name azure-devops"
-10. Azure DevOps organization and Azure DevOps PAT with Full Access. This is important since this script creates several objects in Azure DevOps and requires the ability to create ADO projects, repos, pipelines, service connections, variables, etc.
-11. "Microsoft.DataFactory" will need to be registered for use in the Azure Subscription you are using.  Check using "az provider list --query "[?registrationState=='Registered']" --output table"
+```
+  mkdir ~/bin
+  cd ~/bin
+  curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s\`-\`uname -m` -o envsubst
+  chmod +x envsubst
+```
+4. Check that git is configured for commits by running "git config --list" and ensure that user.name and user.email are set.  If these are not set the script will fail.  Use "git config --global user.name 'John Doe'" and "git config --global user.email 'johndoe@example.com'" to setup.
+5. Azure Devops Extension for Azure CLI.  To install use "az extension add --name azure-devops"
+6. Azure DevOps organization and Azure DevOps PAT with Full Access. This is important since this script creates several objects in Azure DevOps and requires the ability to create ADO projects, repos, pipelines, service connections, variables, etc.
+7. "Microsoft.DataFactory" will need to be registered for use in the Azure Subscription you are using.  Check using "az provider list --query "[?registrationState=='Registered']" --output table"
 
 ## Directions
 1. Clone this repository to an environment that can execute bash scripts (git clone https://github.com/brentmcconnell/adfdevopsdemo.git)
@@ -24,8 +26,15 @@ This repository can be used to setup a working demo of Azure Data Factory across
 7. Set an environment variable called DEVOPS_PAT with the personal access token you created in Preq #4 (export DEVOPS_PAT=xxxxxxxxxxxxxxx)
 8. Create a directory to store the files that will be created and checked into ADO.  This directory should be outside of the current git repo that you are using. In this example I'll use /tmp/adodemo. (mkdir -p /tmp/adodemo)
 9. cd to the "root" directory of this cloned repo.  (cd /tmp/adodemo)
-10. Execute "./az-project-bootstrap.sh -u SP_APPID -p "SP_PASSWORD" -d /tmp/adodemo -e DEV -e PRD".  Be sure to replace SP_APPID and SP_PASSWORD. You can optionally pass in a -n option that will be used as a prefix for the resources created, otherwise defaults will be used.
-11. That's It.  Should take about 5 minutes to run.
+10. Execute: 
+```
+   ./az-project-bootstrap.sh \
+      -u SP_APPID \
+      -p "SP_PASSWORD" \
+      -d /tmp/adodemo \
+      -e DEV -e PRD
+```  
+10. That's It.  Should take about 5 minutes to run.
 
 ## NOTE:
 The az-project-bootstrap.sh script does a number of things and takes several options that can be viewed using the "-h" option
