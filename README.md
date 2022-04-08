@@ -9,7 +9,7 @@ This repository can be used to setup a working demo of Azure Data Factory across
 ```
   mkdir ~/bin
   cd ~/bin
-  curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s\`-\`uname -m` -o envsubst
+  curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-`uname -s`-`uname -m` -o envsubst
   chmod +x envsubst
 ```
 4. Check that git is configured for commits by running "git config --list" and ensure that user.name and user.email are set.  If these are not set the script will fail.  Use "git config --global user.name 'John Doe'" and "git config --global user.email 'johndoe@example.com'" to setup.
