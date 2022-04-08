@@ -2,7 +2,7 @@
 # This script bootstraps a Terraform project for Azure DevOps
 # Running this script will create a remote tfstate file in a storage account.
 # It also will create several resource groups and an Azure DevOps project.
-# A service principal with Contributor to a subscription is required as 
+# A service principal with Owner to a subscription is required as 
 # well as an ADO PAT that can create projects in Azure DevOps.
 
 set -o errexit  # exit if any statement returns a non-true return value
