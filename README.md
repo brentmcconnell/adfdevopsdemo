@@ -2,6 +2,8 @@
 
 This repository can be used to setup a working demo of Azure Data Factory across multiple environments using Terraform.  This will help interesting users learn ways to setup Azure DevOps projects and connect them with Azure Data Factory to publish changes from one environment to another.
 
+**NOTE: This is ONLY an example and should not be used for production purposes.  I, nor my employer, make no guarantees or warannties for use of this script.  Use at your own risk.**
+
 ## Prerequisites
 1. Azure Service Principal with Owner permissions on a subscription.  This is necessary because some of the scripts involved will setup roles and permissions in the subscription.  Using the az cli this can be done with "az ad sp create-for-rbac --role Owner --name ownersp"
 2. Bash shell.  This can be done in Azure Shell or from any workstation that as access to /bin/bash
@@ -38,8 +40,9 @@ This repository can be used to setup a working demo of Azure Data Factory across
 
 ## NOTE:
 The az-project-bootstrap.sh script does a number of things and takes several options that can be viewed using the "-h" option
-1. Creates multiple resource groups (one for each environment + a mgmt resource group that is used by Terraform)
-2. Each environment resource group will contain an ADF and a KeyVault when completed
+1. Can be used with multiple "-e" options to create more than 2 environments, however this has not been tested and will likely not work flawlessly.
+2. Creates multiple resource groups (one for each environment + a mgmt resource group that is used by Terraform)
+3. Each environment resource group will contain an ADF and a KeyVault when completed
 4. Creates an Azure DevOps project that contains 2 repositories (one for Terraform scripts and one for ADF config)
 5. Creates multiple ADO pipelines (one for each environment you create and one for ADF changes)
 6. The mgmt resource group will contain a Storage Account and an Azure KeyVault.  The storage account is used by Terraform to manage Azure state and the Keyvault will contain information about the service principal you passed in on the command line
