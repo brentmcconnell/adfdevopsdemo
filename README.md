@@ -25,7 +25,7 @@ This repository can be used to setup a working demo of Azure Data Factory across
 3. Execute "az login" and login to Azure with an account that has at least "Owner" access to the subscription.  If you are using Azure Shell you will already be logged in with using az.
 5. Collect the appId and password of the service principal that has Owner rights on the subscription.  This SP will be used by Azure DevOps to execute pipelines.  This information was created in the Prerequisites section.
 6. Set an environment variable called ADO_ORG with the URL to your ADO organization (export ADO_ORG=https://dev.azure.com/someorg)
-7. Set an environment variable called DEVOPS_PAT with the personal access token you created in Preq #4 (export DEVOPS_PAT=xxxxxxxxxxxxxxx)
+7. Set an environment variable called DEVOPS_PAT with the personal access token you created in Preq #6 (export DEVOPS_PAT=xxxxxxxxxxxxxxx)
 8. Create a directory to store the files that will be created and checked into ADO.  This directory should be outside of the current git repo that you are using. In this example I'll use /tmp/adodemo. (mkdir -p /tmp/adodemo)
 9. cd to the "root" directory of this cloned repo.  (cd /tmp/adodemo)
 10. Execute: 
