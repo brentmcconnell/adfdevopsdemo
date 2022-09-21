@@ -5,7 +5,7 @@ This repository can be used to setup a working demo of Azure Data Factory across
 **NOTE: This is ONLY an example and should not be used for production purposes.  I, nor my employer, make no guarantees or warannties for use of this script.  Use at your own risk.**
 
 ## Prerequisites
-1. Azure Service Principal with Owner permissions on a subscription.  This is necessary because some of the scripts involved will setup roles and permissions in the subscription.  Using the az cli this can be done with "az ad sp create-for-rbac --role Owner --name ownersp"
+1. Azure Service Principal with Owner permissions on a subscription.  This is necessary because some of the scripts involved will setup roles and permissions in the subscription.  Using the az cli this can be done with "az ad sp create-for-rbac --role Owner --name ownersp --scopes /subscriptions/xxxxx"
 2. Bash shell.  This can be done in Azure Shell or from any workstation that as access to /bin/bash
 3. Azure CLI, jquery, envsubst and git installed on the workstation and configured.  If running in Azure Shell you will need to do the following to install envsubst:
 ```
