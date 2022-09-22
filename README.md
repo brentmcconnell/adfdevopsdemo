@@ -17,7 +17,7 @@ This repository can be used to setup a working demo of Azure Data Factory across
 4. Check that git is configured for commits by running "git config --list" and ensure that user.name and user.email are set.  If these are not set the script will fail.  Use "git config --global user.name 'John Doe'" and "git config --global user.email 'johndoe@example.com'" to setup.
 5. Azure Devops Extension for Azure CLI.  To install use "az extension add --name azure-devops"
 6. Azure DevOps organization and Azure DevOps PAT with Full Access. This is important since this script creates several objects in Azure DevOps and requires the ability to create ADO projects, repos, pipelines, service connections, variables, etc.
-7. "Microsoft.DataFactory" will need to be registered for use in the Azure Subscription you are using.  Check using "az provider list --query "[?registrationState=='Registered']" --output table"
+7. "Microsoft.DataFactory" will need to be registered for use in the Azure Subscription you are using.  Check using "az provider list --query "[?registrationState=='Registered']" --output table".  If it's not "Registered" use "az provider register --namespace Microsoft.DataFactory".  The registration process can take a few minutes to complete.
 
 ## Directions
 1. Clone this repository to an environment that can execute bash scripts (git clone https://github.com/brentmcconnell/adfdevopsdemo.git)
