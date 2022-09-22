@@ -27,7 +27,7 @@ This repository can be used to setup a working demo of Azure Data Factory across
 6. Set an environment variable called ADO_ORG with the URL to your ADO organization (export ADO_ORG=https://dev.azure.com/someorg)
 7. Set an environment variable called DEVOPS_PAT with the personal access token you created in Preq #6 (export DEVOPS_PAT=xxxxxxxxxxxxxxx)
 8. Create a directory to store the files that will be created and checked into ADO.  This directory should be outside of the current git repo that you are using. In this example I'll use /tmp/adodemo. (mkdir -p /tmp/adodemo)
-9. cd to the "root" directory of this cloned repo.  (cd /tmp/adodemo)
+9. cd to the "root" directory of this cloned repo.
 10. Execute: 
 ```
    ./az-project-bootstrap.sh \
